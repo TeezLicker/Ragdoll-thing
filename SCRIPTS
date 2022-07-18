@@ -1,0 +1,39 @@
+--PUT IT IN STARTERCHARACTERSCRIPT WHATEVER THE NAME IS I CANT OPEN ROBLOX STUDIO LOL
+
+script.Parent:WaitForChild("Humanoid").Died:Connect(function()
+	for i,v in pairs(script.Parent:GetChildren()) do
+		if v:IsA("BasePart") then
+			v.BrickColor = BrickColor.new("Institutional white")
+			v.Transparency = 0.5
+			v.Anchored = true
+		end
+	end
+	for i,v in pairs(script.Parent:GetChildren()) do
+		if v:IsA("Shirt") or v:IsA("Pants") then
+			v:Destroy()
+		end
+	end
+	for i,v in pairs(script.Parent:GetChildren()) do
+		if v:IsA("Accessory") then
+			v:Destroy()
+		end
+	end
+	for i,v in pairs(script.Parent.Head:GetChildren()) do
+		if v:IsA("Decal") then
+			v:Destroy()
+		end
+	end
+	for i,v in pairs(script.Parent:GetChildren()) do
+		if v:IsA("BasePart") then
+			v.Anchored = true
+			local Effect = script.Particles:Clone()
+			Effect.Enabled = true
+			Effect.Parent = v
+			v.BrickColor = BrickColor.new("Institutional white")
+			v.Transparency = 1 
+			wait(0.5)
+			Effect.Enabled = false
+		end
+	end
+	
+end)
