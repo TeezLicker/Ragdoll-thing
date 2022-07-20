@@ -1,26 +1,13 @@
---PUT IT IN STARTERCHARACTERSCRIPT WHATEVER THE NAME IS I CANT OPEN ROBLOX STUDIO LOL
+--UPDATED ( DIDNT WORK FOR THE FIRST BUT HERE FR )
 
--- Basically this is a death effect nothing much
--- this script was made by teezlicker ( who is me lol)
+-- btw, put it in SSS (serverscriptservice)
 
-local humanoid = script.Parent:WaitForChild('Humanoid')
-
-humanoid.BreakJointsOnDeath = false
-
-humanoid.Died:Connect(function()
-    for index,joint in pairs(script.Parent:GetDescendants() ) do
-        local socket = Instance.new('BallSocketConstraint')
-        local a1 = Instance.new('Attachment')
-        local a2 = Instance.new('Attachment')
-        a1.Parent =  joint.Part0
-        a2.Parent = joint.Part1
-        socket.Parent = joint.Parent
-        socket.Attachment0 = a1
-        socket.Attachment1 = a2
-        a1.CFrame = joint.C0
-        a2.CFrame = joint.C1
-        socket.LimitsEnabled = true
-        socket.TwistLimitsEnabled = true
-        joint:Destroy()
-        end
+game.Players.PlayerAdded:connect(function(player)
+	player.CharacterAdded:connect(function(character)
+		script.RagdollClient:Clone().Parent = character
+		
+		character:WaitForChild("Humanoid").Died:connect(function()
+			character.UpperTorso:SetNetworkOwner(player)
+		end)
+	end)
 end)
